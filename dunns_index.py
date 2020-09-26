@@ -4,10 +4,10 @@ import math
 def calc_dunn_index(df, num_cluster, col_names):
     max_diam = calc_diam(df, num_cluster, col_names)
     final_dist_set = set()
-    for i in range(0,num_cluster):
-        for j in range(i+1,num_cluster):
-            name1 = 'k cluster ' + str(i)
-            name2 = 'k cluster ' + str(j)
+    for i in range(0, num_cluster):
+        for j in range(i + 1, num_cluster):
+            name1 = 'cluster ' + str(i)
+            name2 = 'cluster ' + str(j)
             c_i = df.loc[df['cluster_mem'] == name1][col_names].values.tolist()
             c_j = df.loc[df['cluster_mem'] == name2][col_names].values.tolist()
             dist_set = set()
@@ -23,12 +23,10 @@ def calc_dunn_index(df, num_cluster, col_names):
     return num / max_diam
 
 
-
 def calc_diam(df, num_cluster, col_names):
     diam_set = set()
     for k in range(0, num_cluster):
-
-        name = 'k cluster ' + str(k)
+        name = 'cluster ' + str(k)
         temp = df.loc[df['cluster_mem'] == name]
         vals = temp[col_names].values.tolist()
         diam_set.add(calc_dist(vals))
